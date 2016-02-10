@@ -14,7 +14,7 @@ end
 pagination = {page: 0}
 loop do
   response = conn.get do |req|
-    if pagination
+    if pagination["last_indexes"]
       p pagination
       # {"pages"=>148, "per_page"=>30, "last_indexes"=>{"last_index"=>248209352, "last_contribution_receipt_date"=>"2015-11-20"}, "count"=>4429}
       req.params["last_index"] = pagination["last_indexes"]["last_index"]
@@ -33,5 +33,5 @@ loop do
     results.push r
   end
 
-  File.open("data.json", 'w') { |file| file.write(results.sort.to_json) }
+  File.open("data.json", 'w') { |file| file.write(results.to_json) }
 end
