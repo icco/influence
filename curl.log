@@ -1,0 +1,10 @@
+curl 'https://api.open.fec.gov/v1/schedules/schedule_a/?api_key=oXyFx4md0kTkxxq9JNfIRlrOPorXc60dqOVEs4GE&is_individual=true&contributor_employer=Google&min_date=01-01-2015&max_date=12-31-2016&sort=-contribution_receipt_date&per_page=30' \
+ -H 'Pragma: no-cache' \
+ -H 'Origin: https://beta.fec.gov' \
+ -H 'Accept-Encoding: gzip, deflate, sdch' \
+ -H 'Accept-Language: en-US,en;q=0.8' \
+ -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36' \
+ -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+ -H 'Referer: https://beta.fec.gov/data/receipts/?is_individual=true&contributor_employer=Google&min_date=01-01-2015&max_date=12-31-2016' \
+ -H 'Connection: keep-alive' \
+ -H 'Cache-Control: no-cache' --compressed
