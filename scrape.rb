@@ -11,7 +11,7 @@ conn = Faraday.new(url: "https://api.open.fec.gov/v1/schedules/schedule_a/?api_k
   faraday.adapter Faraday.default_adapter
 end
 
-pagination = nil
+pagination = {page: 0}
 loop do
   response = conn.get do |req|
     if pagination
@@ -25,9 +25,13 @@ loop do
   end
   data = JSON.parse response.body
 
+  page = pagination[:page] + 1
   pagination = data["pagination"]
+  pagination[:page] = page
 
   data["results"].each do |r|
     results.push r
   end
 end
+
+File.open("data.json", 'w') { |file| file.write(results.to_json) }
