@@ -32,6 +32,6 @@ loop do
   data["results"].each do |r|
     results.push r
   end
-end
 
-File.open("data.json", 'w') { |file| file.write(results.to_json) }
+  File.open("data.json", 'w') { |file| file.write(results.sort.to_json) }
+end
