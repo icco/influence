@@ -5,7 +5,7 @@ require "bundler/setup"
 Bundler.require(:default, RACK_ENV)
 
 results = []
-conn = Faraday.new(url: "https://api.open.fec.gov/v1/schedules/schedule_a/?api_key=oXyFx4md0kTkxxq9JNfIRlrOPorXc60dqOVEs4GE&is_individual=true&contributor_employer=Google&min_date=01-01-2015&max_date=12-31-2016&sort=-contribution_receipt_date&per_page=30") do |faraday|
+conn = Faraday.new(url: "https://api.open.fec.gov/v1/schedules/schedule_a/?api_key=5yyI90SU3Xb73TVlv4wrEhQxYcCwMWCywQiGdYbJ&sort_hide_null=true&is_individual=true&contributor_employer=Google&min_date=01-01-2015&max_date=12-31-2016&sort=-contribution_receipt_date&per_page=30") do |faraday|
   faraday.request :url_encoded
   faraday.response :logger
   faraday.adapter Faraday.default_adapter
@@ -34,4 +34,5 @@ loop do
   end
 
   File.open("data.json", 'w') { |file| file.write(results.to_json) }
+  sleep 5
 end
