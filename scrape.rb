@@ -35,4 +35,7 @@ loop do
 
   File.open("data.json", 'w') { |file| file.write(results.to_json) }
   sleep 5
+  if pagination["pages"] < pagination[:page]
+    exit
+  end
 end
