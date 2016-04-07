@@ -4,16 +4,19 @@ require "rubygems" unless defined?(Gem)
 require "bundler/setup"
 Bundler.require(:default, RACK_ENV)
 
-file = File.read('data.json')
-data = JSON.parse(file)
+File.open('data.json.gz') do |f|
+  gz = Zlib::GzipReader.new(f)
 
-buckets = {}
+  data = JSON.parse(gz.read)
+  gz.close
+  buckets = {}
 
-data.each do |r|
-  buckets[r["committee"]["name"]] ||= 0
-  buckets[r["committee"]["name"]] += (r["contribution_receipt_amount"] * 100).to_i / 100
-end
+  data.each do |r|
+    buckets[r["committee"]["name"]] ||= 0
+    buckets[r["committee"]["name"]] += (r["contribution_receipt_amount"] * 100).to_i / 100
+  end
 
-buckets.sort {|a, b| a[1] <=> b[1] }.each do |name, amount|
-  puts "#{name}: $#{amount}"
+  buckets.sort {|a, b| a[1] <=> b[1] }.each do |name, amount|
+    puts "#{name}: $#{amount}"
+  end
 end
